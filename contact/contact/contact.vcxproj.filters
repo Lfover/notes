@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Template Files">
+      <UniqueIdentifier>{69f5f6fa-21e5-40e8-b4b2-26c6233571c9}</UniqueIdentifier>
+      <Extensions>txt</Extensions>
+    </Filter>
+    <Filter Include="HTML Files">
+      <UniqueIdentifier>{7977c679-c165-4587-a258-d061e66eae8f}</UniqueIdentifier>
+      <Extensions>htm</Extensions>
+    </Filter>
+    <Filter Include="Image Files">
+      <UniqueIdentifier>{54ebfbda-ad22-4ed9-b0cb-813f5d714c18}</UniqueIdentifier>
+      <Extensions>bmp</Extensions>
+    </Filter>
+    <Filter Include="Script Files">
+      <UniqueIdentifier>{45594c6e-c8cf-4ab1-b881-a95f83cd8434}</UniqueIdentifier>
+      <Extensions>js</Extensions>
+    </Filter>
+    <Filter Include="Miscellaneous Files">
+      <UniqueIdentifier>{6df1aa13-1b36-4554-b792-a04e34cbd8e4}</UniqueIdentifier>
+      <Extensions>vsz;vsdir;ico;vcxproj;csproj;css;inf</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Templates\1033\ReadMe.txt">
+      <Filter>Template Files</Filter>
+    </Text>
+    <Text Include="Templates\1033\Sample.txt">
+      <Filter>Template Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\1033\Templates.inf">
+      <Filter>Miscellaneous Files</Filter>
+    </None>
+    <None Include="contact.vsz">
+      <Filter>Miscellaneous Files</Filter>
+    </None>
+    <None Include="Scripts\1033\default.js">
+      <Filter>Script Files</Filter>
+    </None>
+    <None Include="default.vcxproj">
+      <Filter>Miscellaneous Files</Filter>
+    </None>
+    <None Include="contact.vsdir">
+      <Filter>Miscellaneous Files</Filter>
+    </None>
+    <None Include="HTML\1033\default.htm">
+      <Filter>HTML Files</Filter>
+    </None>
+    <None Include="1033\NewStyles.css">
+      <Filter>Miscellaneous Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="contact.ico">
+      <Filter>Miscellaneous Files</Filter>
+    </Image>
+    <Image Include="Images\contact.gif" />
+    <Image Include="Images\contact_Background.gif" />
+    <Image Include="1033\Images\DottedHori.gif" />
+    <Image Include="1033\Images\DottedVert.gif" />
+    <Image Include="1033\Images\spacer.gif" />
+  </ItemGroup>
+</Project>
