@@ -1,0 +1,9 @@
+cpp
+#include <stdio.h>
+#define ADD(num,value) x##num+=value
+int main()
+{
+
+    ADD(1,100);
+    return 0;
+}
