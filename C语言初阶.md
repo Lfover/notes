@@ -42,7 +42,7 @@ C是非常接近计算机体系结构，更讷讷感让我们感受计算机软�
 
 * 枚举常量
 
-  ```
+  ```c++
   enum color{
   YELLOW,
   BLACK,
@@ -92,6 +92,8 @@ C是非常接近计算机体系结构，更讷讷感让我们感受计算机软�
 
 #  函数
 
+定义函数的时候把首字母大写
+
 函数调用好处
 
 > 1.工程上，函数可以让我们的代码更具结构性，好看
@@ -108,7 +110,7 @@ C是非常接近计算机体系结构，更讷讷感让我们感受计算机软�
 
 #  数组
 
-```
+```c++
 int main()
 {
 int arr[10];
@@ -120,6 +122,110 @@ printf("arr[%d]:%d\n",i,arr[i]);
 ```
 
 ![image-20211010205155311](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211010205155311.png)
+
+
+
+##  操作符
+
+### 移位运算符
+
+```c++
+int main ()
+{
+int x=15;//8+4+2+1=00000000 00000000 00000000 00001111
+printf("%d\n",x>>1);//7=00000000 0000000 00000000 00000111
+printf("%d\n",x<<1);//00000000 00000000 00000000 00011110
+}//虽然x左移右移，但是不会影响x的值，除非赋值
+```
+
+> 将整数右移1位相当于÷2
+
+# 关键字
+
+####  0.typedef
+
+typedef是类型定义，理解为类型重命名
+
+**eg**
+
+```c++
+//将unsigned int 重命名为uint_32,所以uint_32也是一个类型名
+typedef unsigned int uint_32;
+int main()
+{
+//观察num1和num2，这两个变量的类型是一样的
+unsigned int num1=0;
+uint_32=0;
+return 0;
+}
+```
+
+####  1.static
+
+* static可以用来修饰变量和函数
+* 被static修饰后类似于全局变量，就不会重复定义i，她修改了局部变量的生命周期，让静态局部变量出了作用域仍然存在，到程序结束，生命周期才结束，但是它的作用域没有变化
+
+**static修饰局部变量**
+
+* ![image-20211011175323511](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211011175323511.png)
+
+**static修饰全局变量**
+
+![image-20211011180657327](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211011180657327.png)
+
+**static修饰函数**
+
+![image-20211011202656149](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211011202656149.png)
+
+####  2#define
+
+* 宏只做简单的文本替换，单独出现的才会被直接替换
+* 想做到理想状态，不要吝啬圆括号（）
+
+![image-20211011210623997](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211011210623997.png)
+
+```c++
+#define DOUBLE(x) x*x
+//如果想要出现121，可以写成#define DOUBLE(X) (X)*(X)
+//DOUBLE(10+1) 10+1*10+1===>21
+#define DOUBLE(x) x+x
+//10*DOUBLE(10+1)  10*10+1+10+1===>112
+int main()
+{
+    printf("%d\n",DOUBLE(10+1));//21
+    printf("%d\n",10*DOUBLE(10+1));
+}
+```
+
+#  指针
+
+####  0内存
+
+![image-20211011213504611](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211011213504611.png)
+
+####  1为什么要有指针
+
+* 对内存编址是为了提高查找效率，编址硬件电路自动完成的
+
+* 什么是指针呢-？指针就是地址，在32位下是4字节，64位是8字节
+
+* 指针变量是变量，变量里面放的内容是地址
+
+* 计算机访问内存的基本单元是字节
+
+* 以32位计算机为例，2^32 * 1字节=（2^10)*(2^10) *(2^10) *(2^2) *1字节=4GB
+
+  ![image-20211011223018862](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211011223018862.png)
+
+> 用空间的：左值
+>
+> 用内容的：右值
+
+![image-20211011223609112](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211011223609112.png)
+
+**对指针进行解引用，代表的是指针所指向的变量，但具体用的是变量的空间还是内容要取决于是左值还是右值**
+
+*所有指针的大小32位是4字节，64位是8字节*
 
 # mem
 
