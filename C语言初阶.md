@@ -227,6 +227,34 @@ int main()
 
 *所有指针的大小32位是4字节，64位是8字节*
 
+
+
+##  分支语句
+
+##  循环语句
+
+####  while
+
+> 如果条件为0，则为假，1为真
+
+![image-20211015215436119](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211015215436119.png)
+
+#####  getchar
+
+> int c=getchar();读进去
+>
+> ##### ctrl+z表示对话框输入完毕，对话框里输入的都是字符
+
+#####  putchar
+
+> putchar()；打出来
+
+
+
+
+
+
+
 # mem
 
 ## 1.malloc
