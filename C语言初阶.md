@@ -108,6 +108,14 @@ C是非常接近计算机体系结构，更讷讷感让我们感受计算机软�
 
 4.函数体：代码块
 
+####  goto 语句
+
+![image-20211016232343177](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211016232343177.png)
+
+
+
+
+
 #  数组
 
 ```c++
@@ -249,7 +257,33 @@ int main()
 
 > putchar()；打出来
 
+![image-20211016090410031](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211016090410031.png)
 
+####  ASCII码
+
+> ASCII表是数据和图形的一种映射关系
+
+####  for()
+
+```c++
+int main()
+{
+int i=0;
+for(;i<=10;i++){
+printf("i:%d\n",i);
+}
+}
+```
+
+> 前闭后开
+
+![image-20211016094542647](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211016094542647.png)
+
+**k对应的是0值**
+
+> 回车换行\n:是指从当前这一行跳到下一行的开始输出
+>
+> 回车\r:是指回到这一行的开始输出
 
 
 
