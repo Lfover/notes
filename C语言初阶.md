@@ -108,9 +108,19 @@ C是非常接近计算机体系结构，更讷讷感让我们感受计算机软�
 
 4.函数体：代码块
 
-####  goto 语句
+####  0.goto 语句
 
 ![image-20211016232343177](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211016232343177.png)
+
+####  1.memset
+
+**头文件-> include <string.h>**
+
+> memset(a,1,sizeof(int)*n)
+>
+> memset在赋值的时候，是以字节为基本单位的！
+
+![image-20211018090025463](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211018090025463.png)
 
 
 
