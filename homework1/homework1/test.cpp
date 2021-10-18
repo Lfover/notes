@@ -1,20 +1,20 @@
 //乘法口诀表
-#include <stdio.h>
-#include <Windows.h>
-#pragma warning(disable:4996)
-
-int main()
-{
-	for (int i = 1; i <= 9; i++){
-		for (int j = 1; j <= 9; j++){
-			printf("%d*%d=%d", i, j, i*j);
-
-		}
-		printf("\n");
-	}
-	system("pause");
-	return 0;
-}
+//#include <stdio.h>
+//#include <Windows.h>
+//#pragma warning(disable:4996)
+//
+//int main()
+//{
+//	for (int i = 1; i <= 9; i++){
+//		for (int j = 1; j <= 9; j++){
+//			printf("%d*%d=%d", i, j, i*j);
+//
+//		}
+//		printf("\n");
+//	}
+//	system("pause");
+//	return 0;
+//}
 
 
 
@@ -109,3 +109,36 @@ int main()
 //	system("pause");
 //	return 0;
 //}
+
+
+//最大公约数，辗转相减法
+#include <stdio.h>
+#include <Windows.h>
+#pragma warning(disable:4996)
+
+
+int Big(int n, int m)
+{
+	while (1){
+		if (n > m){
+			n = n - m;
+		}
+		else if (n < m){
+			m = m - n;
+		}
+		else{
+			break;
+		}
+	}
+	return n;
+}
+int main()
+{
+	int n, m;
+	printf("请输入两个数字");
+	scanf("%d %d", &n, &m);
+	int result = Big(n, m);
+	printf("%d", result);
+	system("pause");
+	return 0;
+}
