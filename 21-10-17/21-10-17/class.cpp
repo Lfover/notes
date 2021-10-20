@@ -1,23 +1,23 @@
 //闰年判定
-#include <stdio.h>
-#include <Windows.h>
-#pragma warning(disable:4996)
-
-int Run(int year)
-{
-	if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
-	{
-		return 1;
-	}
-	return 0;
-}
-int main()
-{
-	int ret = Run(2000);
-	printf("%d\n", ret);
-	system("pause");
-	return 0;
-}
+//#include <stdio.h>
+//#include <Windows.h>
+//#pragma warning(disable:4996)
+//
+//int Run(int year)
+//{
+//	if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+//	{
+//		return 1;
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	int ret = Run(2000);
+//	printf("%d\n", ret);
+//	system("pause");
+//	return 0;
+//}
 
 
 //素数判定

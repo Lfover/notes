@@ -1,5 +1,5 @@
-//B
-//C
+////B
+////C
 //#include <stdio.h>
 //#include <Windows.h>
 //#pragma warning(disable:4996)
@@ -43,6 +43,46 @@
 //	else{
 //		printf("%d", b);
 //	}
+//	system("pause");
+//	return 0;
+//}
+
+//#include <stdio.h>
+//#include <Windows.h>
+//
+//#pragma warning(disable:4996)
+//
+//int Bs(int a[], int num, int x)
+//{
+//	int start = 0;
+//		int end = num-1;
+//		while (start <end){
+//			int mid = (start + end) / 2;
+//			if (a[mid] > x){
+//				end = mid - 1;
+//			}
+//			else if (a[mid] < x){
+//				start = mid + 1;
+//			}
+//			else{
+//				return mid;
+//				break;
+//			}
+//		}
+//		if (start >= end)
+//		{
+//			return -1;
+//		}
+//}
+//int main()
+//{
+//	int a[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+//	int num = sizeof(a) / sizeof(a[0]);
+//	int x = 0;
+//	printf("输入想要查找的数据");
+//	scanf("%d", &x);
+//	int result=Bs(a, num, x);
+//	printf("%d", result);
 //	system("pause");
 //	return 0;
 //}
