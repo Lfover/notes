@@ -122,7 +122,11 @@ C是非常接近计算机体系结构，更讷讷感让我们感受计算机软�
 
 ![image-20211018090025463](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211018090025463.png)
 
+#####  实参与形参--指针
 
+![image-20211018131949570](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211018131949570.png)
+
+###  递归
 
 
 
@@ -141,7 +145,11 @@ printf("arr[%d]:%d\n",i,arr[i]);
 
 ![image-20211010205155311](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211010205155311.png)
 
-
+> 数组作为函数参数的时候，如果你传入了一个数组，真正传参时，要发生数组的降维问题
+>
+> 降维问题：降维成对应发指针
+>
+> 为什么降维：提高效率，通过降低拷贝成本达到的
 
 ##  操作符
 
