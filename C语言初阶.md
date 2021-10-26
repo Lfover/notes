@@ -163,6 +163,33 @@ printf("arr[%d]:%d\n",i,arr[i]);
 
 
 
+![image-20211025230415779](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211025230415779.png)
+
+```
+int arr[]={1,2,3,4,5,6,7,8,9};
+//数组名代表数组首元素的地址
+printf("%p\n",arr);//004FFBD0
+printf("%p\n",&arr[0]);//004FFBD0
+printf("%d\n",*arr);//1
+printf("%p\n",arr+1);//004FFBD4
+printf("%p\n",arr+2);//004FFBD8
+printf("%p\n",*(arr+1);//00000002
+printf("%p\n",arr[1]);//00000002
+printf("%p\n",&arr)
+printf("%p\n",arr+1)
+printf("%p\n",&arr+1)
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##  操作符
