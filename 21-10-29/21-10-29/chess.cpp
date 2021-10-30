@@ -47,9 +47,8 @@ void ComputerMove(char board[][COL], int row, int col)
 	{
 		int i = rand() % row;
 		int j = rand() % col;
-		if (board[i][j] != ' '){
+		if (board[i][j] == ' '){
 			board[i][j] = WHITE_PIECE;
-		//	ShowBoard(board, ROW, COL);
 			break;
 		}
 	}
@@ -71,11 +70,11 @@ char JudgeResult(char board[][COL], int row, int col)
 			return board[0][i];
 		}
 	}
-	if (board[0][0]!=' '&&board[0][0] == board[1][1] && board[1][1] == board[2][2]){
+	if (board[0][0] !=' '&&board[0][0] == board[1][1] && board[1][1] == board[2][2]){
 		return board[0][0];
 	}
-	if (board[0][2] != ' '&&board[0][2] == board[1][1] && board[1][1] == board[2][0]){
-		return board[0][2];
+	if (board[0][2] !=' '&&board[0][2] == board[1][1] && board[1][1] == board[2][0]){
+		return board[1][1];
 	}
 
 	for (int i = 0; i < row; i++){
