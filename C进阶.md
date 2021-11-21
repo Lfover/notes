@@ -193,3 +193,152 @@ int a[4]{1, 2, 3, 4};
 1.ptr1 = (int  * )(&a + 1)，指向下一个数组的地址，ptr[-1]等价于*(ptr-1)
 
 ![image-20211116231213351](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211116231213351.png)
+
+###  字符函数和字符串函数
+
+#### 字符串操作
+
+#####  1.长度不受限制的字符串函数
+
+#####  strlen
+
+> 1.返回值为size_t类型，无符号类型
+>
+> 2.无符号数进行计算，结果也是无符号的，所以都是大于等于0的
+
+```c++
+#include <iostream>
+#include <Windows.h>
+using namespace std;
+
+int main()
+{
+
+	const char *str1 = "abcdef";
+	const char *str2 = "bbb";
+	if (strlen(str2) - strlen(str1) > 0)
+	{
+		cout << "str2>str1";
+	}
+	else{
+		cout << "str1>str2";
+	}
+	system("pause");
+	return 0;
+}
+```
+
+![image-20211121123104957](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211121123104957.png)结果：
+
+#####  strcpy
+
+![image-20211121123329971](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211121123329971.png)
+
+因为是string 拷贝，所以一定要携带‘、0’
+
+#####  strcat
+
+> 1.字符串拼接的过程，本质也是拷贝
+>
+> 2.strcpy是从缓冲区起始位置开始拷贝的
+>
+> 3.strcat是从目标字符串的结尾（\0）开始拷贝的
+>
+> 4.既然都是拷贝，所以都可能存在越界问题，提供的目标缓冲区空间不足
+
+```c++
+#include <iostream>
+#include <Windows.h>
+using namespace std;
+
+int main()
+{
+	const char *src_str = "12345";
+	char dst_str[32] = "abcdef";
+	strcat_s(dst_str, src_str);
+	cout << dst_str;
+	system("pause");
+	return 0;
+}
+```
+
+#####  strcmp
+
+![image-20211121133618555](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211121133618555.png)
+
+> 如果前者大，返回1，后者大，返回-1，一样大返回0；
+
+#####  2.长度受限制的字符串函数
+
+#####  strncpy
+
+> 不携带任何'\0'
+
+#####  strncat
+
+puts()不做任何格式化输出，原封不动的输出
+
+#####  strncmp
+
+> 三个参数
+
+
+
+#####  strstr
+
+> 再str1里寻找是否有子串str2,找到了就从找到位置开始，到字符串末尾
+
+#####  strtok
+
+> 用来切割字符串
+>
+> 1.函数内部使用static局部变量，来保存历史字符串的剩余子串
+>
+> 2.采用对分隔符进行设置为\0的策略来进行子串划分
+>
+> 3.strtok进行子串截取的时候，采用的策略是截取有效字符串
+>
+> 4.分割的时候，strtok会自动进行分隔符过滤
+
+![image-20211121184053112](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211121184053112.png)
+
+系统调用startUp()函数，startUp()调用main()函数
+
+main()函数退出，代表程序退出，return 0=>任务退出，且任务无错完成
+
+return ！0->任务退出，但是任务出错，具体是什么原因，由该数字表示
+
+#####  strerror
+
+> 错误信息报告（退出码，错误码）
+>
+> strerror(n),可以输出n代表的错误
+
+#### 字符操作
+
+![image-20211121195729074](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20211121195729074.png)
+
+> 大写字母改成小写字母，小写字母改成大写，判断是不是字母
+
+
+
+#### 内存操作
+
+> mem*系列的函数，叫做内存操作函数，本质是不关心类型，只关心操作的字节数，也就是说men*系列函数，操作的基本单位是字节
+
+#####  memcpy
+
+内存覆盖，可以hold住重叠
+
+#####  memmove
+
+内存覆盖，可以hole住重叠
+
+**解决内存重叠的问题，解决方案是通过一定的判断，来进行决策，是从左向右拷贝，还是从右向左拷贝**
+
+#####  memset
+
+#####  memcmp
+
+
+
