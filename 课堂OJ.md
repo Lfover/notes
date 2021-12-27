@@ -32,27 +32,27 @@
 
 8、[链表的回文结构]([链表的回文结构_牛客题霸_牛客网 (nowcoder.com)](https://www.nowcoder.com/practice/d281619e4b3e4a60a2cc66ea32855bfa?tpId=49&&tqId=29370&rp=1&ru=/activity/oj&qru=/ta/2016test/question-ranking))
 
-9、[给定两个链表，找出他们的第一个公共结点](
+9、[给定两个链表，找出他们的第一个公共结点]([160. 相交链表 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/submissions/))
 
-10、[给定一个链表，判断链表是否有环](
+10、[给定一个链表，判断链表是否有环]([141. 环形链表 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/linked-list-cycle/submissions/))
 
-11、[给定一个链表，返回链表开始入环的第一个结点。如果链表无环，则返回NULL](
+11、[给定一个链表，返回链表开始入环的第一个结点。如果链表无环，则返回NULL]([142. 环形链表 II - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/linked-list-cycle-ii/submissions/))
 
-12、[给定一个链表，每个结点包含一个额外增加的随机指针，该指针可以指向链表中的任何结点或空结点，要求返回这个链表的深度拷](
+12、[给定一个链表，每个结点包含一个额外增加的随机指针，该指针可以指向链表中的任何结点或空结点，要求返回这个链表的深度拷贝]([138. 复制带随机指针的链表 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/copy-list-with-random-pointer/submissions/))
 
 
 
 ####  栈和队列
 
-1、[括号匹配问题](
+1、[括号匹配问题]([20. 有效的括号 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/valid-parentheses/))
 
-2、[用队列实现栈](
+2、[用队列实现栈]([225. 用队列实现栈 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/implement-stack-using-queues/))
 
-3、[用栈实现队列](
+3、[用栈实现队列]([232. 用栈实现队列 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/implement-queue-using-stacks/submissions/))
 
 4、[实现一个最小栈](
 
-5、[设计循环队列](
+5、[设计循环队列]([622. 设计循环队列 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/design-circular-queue/))
 
 ####  二叉树
 
