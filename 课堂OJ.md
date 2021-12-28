@@ -50,7 +50,7 @@
 
 3、[用栈实现队列]([232. 用栈实现队列 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/implement-queue-using-stacks/submissions/))
 
-4、[实现一个最小栈](
+4、[实现一个最小栈]([155. 最小栈 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/min-stack/))
 
 5、[设计循环队列]([622. 设计循环队列 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/design-circular-queue/))
 
@@ -58,29 +58,33 @@
 
 #####  初阶
 
-1、[二叉树的前序遍历](
+1、[二叉树的前序遍历]([144. 二叉树的前序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/submissions/))
 
-2、[二叉树的中序遍历](
+2、[二叉树的中序遍历]([94. 二叉树的中序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/submissions/))
 
-3、[二叉树的中序遍历](
+3、[二叉树的后序遍历]([145. 二叉树的后序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/))
 
-4、[检查两棵树是否相同](
+4、[检查两棵树是否相同]([100. 相同的树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/same-tree/submissions/))
 
-5、[另一棵树的子树](
+5、[另一棵树的子树]([572. 另一棵树的子树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/subtree-of-another-tree/submissions/))
 
-6、[二叉树的最大深度](
+6、[二叉树的最大深度]([104. 二叉树的最大深度 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/submissions/))
 
-7、[判断以可二叉树是否是平衡二叉树](
+7、[判断以可二叉树是否是平衡二叉树]([110. 平衡二叉树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/balanced-binary-tree/))
 
-8、[对称二叉](
+8、[对称二叉树]([101. 对称二叉树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/symmetric-tree/submissions/))
 
-9、[二叉树的构建及遍历](
+9、[二叉树的构建及遍历]([二叉树遍历_牛客题霸_牛客网 (nowcoder.com)](https://www.nowcoder.com/practice/4b91205483694f449f94c179883c1fef?tpId=60&&tqId=29483&rp=1&ru=/activity/oj&qru=/ta/tsing-kaoyan/question-ranking))
+
+10、[翻转二叉树]([226. 翻转二叉树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/invert-binary-tree/submissions/))
+
+11、[单值二叉树]([965. 单值二叉树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/univalued-binary-tree/submissions/))
 
 #####  进阶
 
-1、[二叉树创建字符串](
+1、[二叉树创建字符串]([606. 根据二叉树创建字符串 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/construct-string-from-binary-tree/submissions/))
 
-2、[二叉树的分层遍历](
+2、[二叉树的分层遍历]([102. 二叉树的层序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/))
 
 3、[给定一个二叉树，找到该树中两个指定结点的最近公共祖先](
 
@@ -90,11 +94,11 @@
 
 6、[根据一棵树的中序遍历与后序遍历构造二叉树](
 
-7、[二叉树的前序遍历，非递归代码实现](
+7、[二叉树的前序遍历，非递归代码实现]([144. 二叉树的前序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/submissions/))
 
-8、[二叉树的中序遍历，非递归迭代实现](
+8、[二叉树的中序遍历，非递归迭代实现]([94. 二叉树的中序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/submissions/))
 
-9、[二叉树的后序遍历，非递归迭代实现](
+9、[二叉树的后序遍历，非递归迭代实现]([145. 二叉树的后序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/))
 
 
 
