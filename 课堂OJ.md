@@ -86,13 +86,13 @@
 
 2、[二叉树的分层遍历]([102. 二叉树的层序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/))
 
-3、[给定一个二叉树，找到该树中两个指定结点的最近公共祖先](
+3、[给定一个二叉树，找到该树中两个指定结点的最近公共祖先]([236. 二叉树的最近公共祖先 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/submissions/))
 
-4、[二叉树搜索树转换成排序双向链表](
+4、[二叉树搜索树转换成排序双向链表]([二叉搜索树与双向链表_牛客题霸_牛客网 (nowcoder.com)](https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&&tqId=11179&rp=1&ru=/activity/oj&qru=/ta/coding-interviews/question-ranking))
 
-5、[根据一棵树的前序遍历与中序遍历构造二叉树](
+5、[根据一棵树的前序遍历与中序遍历构造二叉树]([105. 从前序与中序遍历序列构造二叉树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/))
 
-6、[根据一棵树的中序遍历与后序遍历构造二叉树](
+6、[根据一棵树的中序遍历与后序遍历构造二叉树]([106. 从中序与后序遍历序列构造二叉树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/))
 
 7、[二叉树的前序遍历，非递归代码实现]([144. 二叉树的前序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/submissions/))
 
