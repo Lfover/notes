@@ -930,14 +930,171 @@ auto
 
 #  类和对象
 
-面向过程和面向对象的初步认识
+## 面向过程和面向对象的初步认识
 
 > * C语言是面向过程的，关注的是过程，分析出求解问题的步骤，通过函数调用逐步解决问题
 > * c++是**基于**面向对象的，因为c++中既有面向对象，又有面向过程，因为c++是兼容C语言的，关注的是对象，通过对象之间的交互完成
 
+## 引入类
+
+* C语言中，结构体只能定义变量
+
+* c++中，结构体不仅可以定义变量，还可以定义函数
+
+```c++
+struct People
+{
+    void InitPeople(const char* name, const char* gender, int age)
+    {
+        strcpy(_name, name);
+        strcpy(_gender, gender);
+        _age = age;
+    }
+    
+    void printfPeople()
+    {
+        cout << _name << " " << _gender << " " << _age << endl;
+    }
+    
+    char _name[20];
+    char _gender[3];
+    int _age;
+};
+```
+
+在c++中，用类代替了C语言的结构体，类也更符合人类对事务的认知，因为事务都具有属性和功能，抽象到类里，就是成员变量和成员函数
+
+### 📍在c++中，struct和class有什么区别呢
+
+> * c++兼容C语言，所以c++中struct 可以当成结构体去使用
+> * c++中的struct也可以用来定义类，和class来定义类是一样的
+> * 唯一的区别就是，struct的成员默认访问方式是public，class访问方式是private
+
+##  类的定义
+
+### 类如何定义呢
+
+![image-20220110134616032](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220110134616032.png)
+
+### 类的两种定义方式
+
+#### 1.定义和声明全部放在类内
+
+```c++
+struct People
+{
+public:
+    void InitPeople(const char* name, const char* gender, int age)
+    {
+        strcpy(_name, name);
+        strcpy(_gender, gender);
+        _age = age;
+    }
+    
+    void printfPeople()
+    {
+        cout << _name << " " << _gender << " " << _age << endl;
+    }
+    
+    char _name[20];
+    char _gender[3];
+    int _age;
+};
+```
+
+#### 2.声明在.h文件，定义在.cpp文件
+
+```c++
+//声明在头文件People.h中
+struct People
+{
+public；
+    void InitPeople(const char* name, const char* gender, int age);
+    
+    void printfPeople();
+    
+    char _name[20];
+    char _gender[3];
+    int _age;
+};
+```
+
+```c++
+//包含头文件
+#include "People"
+struct People
+{
+    void InitPeople(const char* name, const char* gender, int age)
+    {
+        strcpy(_name, name);
+        strcpy(_gender, gender);
+        _age = age;
+    }
+    
+    void printfPeople()
+    {
+        cout << _name << " " << _gender << " " << _age << endl;
+    }
+};
+```
+
+###  注意
+
+> 成员函数如果在类中定义和声明的话，编译器可能会将其作为内联函数处理
+
+正常情况下，我们更喜欢第二种方法
+
+##  类的访问限定符和封装
+
+###  什么是封装
+
+定义
+
+> 将数据和操作数据的方法进行有机的结合，隐藏对象的属性和实现细节，进对外公开接口来和对象进行交互
+
+本质
+
+> 封装的本质是管理，例如为了保护兵马俑，将兵马俑用大房子封装起来，这样就不会被别人看到，但是又开放了售票窗口，让人在合理的监控管制下进去参观
+
+###  访问限定符
+
+三种
+
+public:公有
+
+protected：保护
+
+private：私有
 
 
 
+##  类的作用域
 
 
+
+##  类的实例化
+
+
+
+##  类对象的存储方式
+
+
+
+##  计算类的大小
+
+###  类的大小怎么计算
+
+
+
+###  为什么空类的大小不是0？
+
+我们先假设空类的大小就是0，那用这个空类去定义三个对象，首先要知道，这三个对象是不是一样的？
+
+不是
+
+但是我们都知道，创建对象要在栈帧上开辟空间
+
+
+
+## 详解this指针
 
