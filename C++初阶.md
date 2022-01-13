@@ -1114,3 +1114,254 @@ private：私有
 
 ##  析构函数
 
+
+
+## 拷贝构造函数
+
+拷贝构造函数调用场景：当用已经存在的对象创建新对象时，编译器会自动调用拷贝构造函数完成新对象的初始化工作
+
+```c++
+
+class Data
+{
+public:
+	Data(int year, int month, int day)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+	Data(const Data& d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
+	void PrintfData()
+	{
+		cout << _year << " " << _month << " " << _day << endl;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+int main()
+{
+	Data d1(2022, 1, 13);
+	Data d2(d1);
+	system("pause");
+	return 0;
+}
+
+```
+
+拷贝函数的参数只有一个，且必须使用引用传参
+
+为什么必须用引用传参
+
+假设不用引用传参可以通过编译
+
+```c++
+	Data(const Data d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
+```
+
+以值传参，在传参期间会生成一个临时对象，实参的拷贝
+
+![image-20220113093957806](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220113093957806.png)
+
+如果不是引用传参，就会一直为了构造临时对象而发生无穷递归调用
+
+
+
+
+
+
+
+如果一个类没有显示实现拷贝构造函数，则编译器会生成一份默认构造函数
+
+出现一个问题，既然编译器会给我们生成默认拷贝构造函数，那我们还有必要自己写嘛？
+
+我们要知道默认拷贝构造函数的拷贝方式：将一个对象`原封不动`的拷贝到新对象中
+
+看个例子
+
+```c++
+class String
+{
+public:
+	String(const char* str = "jack")
+	{
+		_str = (char *)malloc(strlen(str) + 1);
+		strcpy(_str, str);
+	}
+//多次调用析构函数
+	~String()
+	{
+		free(_str);
+		_str = nullptr;
+	}
+private:
+	char* _str;
+};
+int main()
+{
+	
+	system("pause");
+	return 0;
+}
+```
+
+
+
+默认拷贝构造函数执行完成之后，s1,s2在底层公用的是同一份堆空间，被称为`浅拷贝`
+
+![image-20220113160926430](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220113160926430.png)
+
+浅拷贝后果：
+
+多个对象共同使用同一份资源，在这些对象被销毁时，同一份资源会被释放`多次`，引起崩溃
+
+> 编译器生成的默认拷贝构造函数，是按照浅拷贝方式实现的
+>
+> 浅拷贝：将一个对象中的内容原封不动的拷贝到另一个对象中
+>
+> 后果：多个对象共享同一份资源，最终在对象销毁时该份资源被释放多次而导致程序崩溃
+
+如果类中涉及到资源管理时，该类必须`显示`提供析构函数，在析构函数中将对象的资源释放掉
+
+否则资源泄露了
+
+什么时候需要自己实现拷贝构造函数，什么时候实不实现无所谓？
+
+> 一个类中如果设计到`资源管理`时，拷贝构造函数是必须要实现的
+
+
+
+
+
+##  赋值运算符重载
+
+先看一个Data类
+
+```c++
+class Data
+{
+public:
+	Data(int year, int month, int day)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+	Data(const Data& d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
+	void PrintfData()
+	{
+		cout << _year << " " << _month << " " << _day << endl;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+int main()
+{
+    Data d1(2022, 1, 12);
+    Data d2(d1);
+    Data d3(2022, 1, 13);
+    //调用赋值运算符重载函数
+    d1 = d3;
+    
+}
+```
+
+如果类没有显示实现赋值运算符重载函数，则编译器会生成一份默认运算符重载函数，完成对象之间的赋值操作
+
+
+
+再看另一个String类
+
+```c++
+class String
+{
+public:
+    //构造函数
+	String(const char* str = "jack")
+	{
+		_str = (char *)malloc(strlen(str) + 1);
+		strcpy(_str, str);
+	}
+    //拷贝构造函数
+    String(const string& s)
+    {
+        cout << "拷贝构造函数" << endl;
+    }
+
+	~String()
+	{
+        if(_str)
+        {
+			free(_str);
+			_str = nullptr;
+        }
+	}
+private:
+	char* _str;
+};
+int main()
+{
+	String s1("hello world");
+	String s2("Hello World");
+    s1 = s2;
+	system("pause");
+	return 0;
+}
+```
+
+观察上面的代码有没有什么问题
+
+![image-20220113123305349](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220113123305349.png)
+
+
+
+![image-20220113123341966](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220113123341966.png)
+
+![image-20220113123502717](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220113123502717.png)
+
+两个问题
+
+> 1.浅拷贝：一份内存资源释放多次，引起代码崩溃
+
+> 2.s1被赋值后，地址变得和s2一样，s1的内存丢失了，造成内存泄露
+
+编译器生成的赋值运算符重载是按照浅拷贝方式实现的，如果类中涉及到资源管理时，会造成以上两个后果
+
+
+
+如何类中涉及资源管理时，赋值运算符重载必须显示写出来
+
+赋值运算符重载
+
+注意：赋值运算符重载与函数重载没有任何关系
+
+函数重载：在相同作用域，函数名字相同，参数列表不同，（个数，类型，类型次序），与返回值类型没有关系
+
+
+
+想了解赋值运算符重载，需要了解运算符重载
+
+对于
+
+需要对该运算符进行重载，相当于告诉编译器针对该类型的对象如何进行运算符操作
