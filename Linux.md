@@ -1208,19 +1208,13 @@ Linux对进程状态进行细分
 
 到底应该将哪些数据放到磁盘上呢---内存置换法：最久未使用，最少未使用
 
-### 进程控制
+## 进程控制
+
+###  进程创建
 
 ### pid_t fork(void);
 
-
-
-创建
-
-代码共享，数据独有
-
-![image-20220113193457566](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220113193457566.png)
-
-
+> 代码共享，数据独有![image-20220113193457566](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220113193457566.png)
 
 内存管理的过程
 
@@ -1230,7 +1224,7 @@ Linux对进程状态进行细分
 
 为什么不一开始就给子进程开辟空间呢？
 
-> 如果这个子进程不适用，不久浪费了嘛，降低了进程创建的效率，还会造成内存冗余数据
+> 如果这个子进程不适用，不就浪费了嘛，降低了进程创建的效率，还会造成内存冗余数据
 
 所以我们采用写时拷贝技术
 
@@ -1242,13 +1236,29 @@ Linux对进程状态进行细分
 >
 > 进程之间没有交叉关系，不会受到其他进程的影响，为了保证进程的稳定运行
 
+返回值：对于父进程返回的是子进程的pid，是大于0的
+
+​                对于子进程返回的是0
+
+通过返回值可以进行父子代码分流
+
+pid_t pid = fork();
+
+if(pid < 0)  error
+
+if(pid > 0) parent
+
+if(pid == 0) child
+
+![image-20220114083300978](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114083300978.png)
+
 ###  pid_t vfork()
 
 创建一个子进程，但是一个父进程使用vfork创建子进程之后，vfork的调用并不会立即返回（通常说会阻塞父进程），而是让子进程先运行，直到子进程退出，或者程序替换之后，父进程才能运行
 
 
 
-vfork创建子进程有一个特殊的地方，父子进程共用了父进程的虚拟空间，在程序运行中，每调用一次函数，就会有一次函数压栈，函数调用栈
+vfork创建子进程有一个特殊的地方，**父子进程共用了父进程的虚拟空间**，所以子进程数据改变，父进程数据也会改变，在程序运行中，每调用一次函数，就会有一次函数压栈，函数调用栈
 
 因为父子进程公用虚拟地址空间，使用了同一个栈，则若父子进程同时运行，就会造成调用栈混乱，让子进程先运行，直到子进程退出或者程序替换后有了自己的地址空间（在原有的地址空间中子进程的调用就都出栈了）
 
@@ -1264,9 +1274,133 @@ vfork创建子进程有一个特殊的地方，父子进程共用了父进程的
 
 
 
-终止
+### 进程终止
 
-等待
+方法一：
+
+main函数中的return
+
+![image-20220114084028840](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114084028840.png)
+
+![image-20220114083925610](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114083925610.png)
+
+---
+
+
+
+![image-20220114084734592](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114084734592.png)
+
+
+
+![image-20220114084703376](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114084703376.png)
+
+方法二
+
+> #include <stdlib.h>
+>
+> 在任意一个位置调用void exit(int status),可以在程序的任意一个位置退出一个进程
+
+
+
+![image-20220114084947540](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114084947540.png)
+
+![image-20220114084914876](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114084914876.png)
+
+
+
+方法三
+
+> #include <unistd.h>
+>
+> 在任意一个位置调用void _exit(int status),可以在程序的任意一个位置退出一个进程
+
+
+
+![image-20220114085416985](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114085416985.png)
+
+![image-20220114085337481](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114085337481.png)
+
+
+
+看起来exit和_exit没什么不同呀
+
+exit和_exit的区别
+
+> 1.exit是库函数，_exit是系统调用接口
+>
+> 2.exit退出程序时，会刷新缓冲区，将缓冲区数据写入文件，_exit退出程序时，直接释放资源，不会刷新缓冲区
+
+
+
+printf打印数据，实际上是把数据交给显示器，让显示器显示出来，涉及到了不同设备之间的数据交互
+
+如果有很多小的数据要频繁交给显示器，效率是比较低的
+
+因此操作系统做了一种优化
+
+把很多小数据放到内存缓冲区中，积累成一个大的数据，然后让显示器一次性取出来，只有一次设备间的交互
+
+因此printf没有立即把数据交给显示器，而是放到内存中（缓冲区），等到程序退出的时候，或者缓冲区刷新的时候才会把数据交给显示器
+
+\n的作用
+
+> 1.换行
+>
+> 2.刷新缓冲区（特定的显示器设备，通常称之为标准输出）
+
+
+
+### 进程等待
+
+进程退出的场景
+
+正常退出：完成任务，按照逻辑运行到return或者exit地方退出了
+
+异常退出：没有完成任务，程序运行到半途因为某些原因崩溃退出
+
+> 不管子进程时正常退出，还是异常退出，只要每被处理，就会产生僵尸进程
+
+父进程等待子进程，为了获取退出子进程返回值，释放退出子进程所有资源，避免产生僵尸进程
+
+僵尸进程产生的原因：因为子进程先于父进程退出，为了保存退出的返回值，而无法完全释放资源产生的
+
+如何等待
+
+方法一
+
+int wait(int *status);
+
+处理退出的子进程，那么如果调用这个接口的时候没有子进程已经退出，则会使父进程等待，直到有子进程退出
+
+阻塞：为了完成一个功能，我们发起一个调用，但是若当前不具备完成功能的条件，则调用等待
+
+非阻塞：为了完成一个功能，我们发起一个调用，但是若当前不具备完成功能的条件，则调用立即报错返回
+
+status输出型参数，用于获取退出子进程的返回值
+
+不等待的情况
+
+![image-20220114103259475](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114103259475.png)
+
+
+
+![image-20220114104542851](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114104542851.png)
+
+
+
+等待的情况
+
+记得包含头文件#include <sys/wait.h>
+
+
+
+![image-20220114103908521](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114103908521.png)
+
+![image-20220114103817402](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220114103817402.png)
+
+方法二
+
+int waitpid(int pid, int *status, int option);
 
 程序替换
 
