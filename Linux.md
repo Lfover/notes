@@ -1608,7 +1608,7 @@ bash其实也是一个程序
 
 返回值：打开成功返回文件流指针，打开失败返回null
 
-2.读
+2.写
 
 fwrite
 
@@ -1881,7 +1881,13 @@ gcc main.c -o main -L [path] -l[静态库的名字]
 
 ### 进程间通信
 
-1管道啊
+📍为什么需要进程间通信
+
+​	原因是由于进程都拥有自己独立的进程虚拟地址空间，从而导致了进程的独立性，可以让不同的进程进行协作，
+
+📍目前最大的进程间通信技术是：网络
+
+#### 1管道啊
 
 1.1从命令来看
 
@@ -1976,25 +1982,117 @@ gcc main.c -o main -L [path] -l[静态库的名字]
 >
 > ​	3.其他的特性和命名管道一致
 
-共享内存
+#### 2.共享内存
 
 > ![image-20220123190412651](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220123190412651.png)
+>
+> ###### 1.创建共享内存
+>
+> ​	int shmget(key_t key, size_t size, int shmflg);
+>
+> ​		key：共享内存标识符，这个标识符相当于共享内存的身份证
+>
+> ​				程序员在第一次创建的时候，可以任意给值，只要和当前操作系统当中的其他的共享内存标识符不重复；eg:0x99999999  0x88888888  0x12345678
+>
+> ​		size:共享内存的大小，单位字节
+>
+> ​		shmflg:
+>
+> ​				IPC_CREAT:如果共享内存不存在，则创建共享内存
+>
+> ​				IPC_EXCL:需要搭配IPC_CREAT一起使用，这样的宏在搭建使用的时候，，还是采用按位或的方式（核心思想就是位图） eg：IPC_CREAT | IPC_EXCL:如果想要获取的共享内存已经存在，则报错；如果想要获取的共享内存是刚刚创建出来的共享内存，返回操作句柄
+>
+> **总结**：使用shmget这个函数的时候一定要注意，是刚刚创建出来的共享内存
+>
+> 返回值：返回值是返回共享内存的操作句柄
+>
+> **共享内存的标识符和共享内存的操作句柄的区别**
+>
+> 标识符：是用来描述共享内存的，相当于共享内存的身份证，意味着不同的进程可以通过标识符找到这个共享你存
+>
+> 操作句柄：进程可以通过操作句柄来对共享内存进行操作（附加，分离，删除）
+>
+> ![image-20220127210346449](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127210346449.png)
+>
+> 结论：共享内存的生命周期是跟随操作系统内核的
+>
+> ###### 2.将共享内存附加到进程
+>
+> void *shmat(int shmid, const void *shmaddr, int shmflg);
+>
+> ​	shmid:共享内存的操作句柄
+>
+> ​	shmaddr:附加到共享内存的虚拟地址，允许传递NULL值，让操作系统帮我们选择附加到共享区当中的那个地址，这个地址通过该函数的返回值返回给我们
+>
+> ​	shmflg:
+>
+> ​		SHM_RDONLY:规定当前进程只能对共享内存的进行读操作
+>
+> ​		0：可读可写
+>
+> ​	返回值：返回共享内存附加到共享区的地址
+>
+> **总结**：进程在读取共享内存的时候，是访问，不是拿走
+>
+> ###### 3.将共享内存和进程分离
+>
+> int shmdt(const void *shmaddr);
+>
+> ​	shmaddr:shmat的返回值
+>
+> ###### 4.操作共享内存
+>
+> int shmctl(int shmid, int cmd, struct shmid_ds *buf);
+>
+> ​	shmid:共享操作句柄
+>
+> ​	cmd:告诉shmctl函数需要做什么操作
+>
+> ​			IPC_STAT: 获取当前共享内存的属性信息，放在buf当中，buf是出参
+>
+> ​			IPC_SET:设置共享内存的属性信息，是用buf来进行设置的， BUF是入参
+>
+> ​			IPC_RMID：删除共享内存，buf可以直接传递为NULL
+>
+> ​	buf:共享内存的结构体
+>
+> ###### 5.删除共享内存
+>
+> 1.当使用shmctl或者使用ipcrm，删除共享内存之后，共享内存就实际被释放了
+>
+> 2.当共享内存被释放之后，共享内存的标识符就会被设置成0x00000000,表示其他进程不能通过之前的标识符找到该共享内存，并且共享内存的状态就会被设置为dest(destory)
+>
+> > 当共享内存被释放掉之后，但是还是有进程附加在共享内存，当前描述共享内存的结构体并没有被释放，直到当前共享内存的附加进程数量为0的时候才会被释放掉
 
 
 
 
 
-2 共享内存
 
-3 消息队列
 
-4信号量
+#### 3 消息队列
 
-📍为什么需要进程间通信
+1.队列都是先进先出，消息队列也满足先进先出的特性，内核当中实现消息队列的时候，是采用链表这个结构体
 
-​	原因是由于进程都拥有自己独立的进程虚拟地址空间，从而导致了进程的独立性，可以让不同的进程进行协作，
+2.消息队列当中元素是有类型的，每一种类型是有优先级概念的
 
-📍目前最大的进程间通信技术是：网络
+![image-20220127220953906](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127220953906.png)
+
+![image-20220127220743205](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127220743205.png)
+
+#### 4信号量
+
+1.信号量的底层是一个计数器
+
+2.信号量是用来进程控制的
+
+临界资源：多个进程能够访问到的资源，被称为临界资源
+
+​					多线程当中，多个线程都能访问到的资源，被称为临界资源
+
+**面试题**
+
+> 列举你所直到的进程间的通信：管道，共享内存， 消息队列，信号，网络，unix域套接字，信号量
 
 
 
@@ -2074,6 +2172,8 @@ gcc main.c -o main -L [path] -l[静态库的名字]
 >
 > 当与之对应的比特位为1的时候，表示当前进程收到了该信号
 >
+> ![image-20220127221817889](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127221817889.png)
+>
 > 1.非可靠信号的注册
 >
 > ​	1.1当进程收到一个非可靠信号
@@ -2081,12 +2181,45 @@ gcc main.c -o main -L [path] -l[静态库的名字]
 > ​		第一件事情：将非可靠信号对应的比特位更改为1；
 >
 > ​		第二件事情：添加sigqueue结点到sigqueue队列当中去
+>
+> > 但是在添加sigqueue节点的时候，队列当中已经有了该信号的sigqueue节点，则不添加
+>
+> ![image-20220127222156020](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127222156020.png)
+>
+> 2.可靠信号的注册
+>
+> ​	1.如果一个进程收到一个可靠信号
+>
+>   * 第一件事：在sig位图当中更改该信号对应的比特位为1
+>   * 第二件事：不论之前在sigqueue队列当中是否存在该信号的sigqueue节点，都再次添加sigqueue节点到sigqueue队列当中去
+>
+> ![image-20220127222827376](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127222827376.png)
+
+##### 内核的源码
+
+> ![image-20220127190224054](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127190224054.png)
 
 ##### 信号的注销
 
-> 1.
+> 1.非可靠信号的注销
 >
-> 2.
+> ​	1.将该信号的sigqueue节点从sigqueue队列中进行出队操作
+>
+> ​	2.信号在sig位图当中对应的比特位从1置0；
+>
+> 2.可靠信号的注销
+>
+> ​	1.将该信号的sigqueue节点从sigqueue队列当中进行出队操作
+>
+> ​	2.需要在判断sigqueue队列当中是否还有相同的sigqueue节点
+>
+> ​		2.1没有
+>
+> ​				信号在sig位图当中对应的比特位从1置为0
+>
+> ​		2.2还有
+>
+> ​				不会更改sig位图当中对应的比特位从1置为0
 
 ##### 信号的捕捉处理
 
@@ -2097,8 +2230,52 @@ gcc main.c -o main -L [path] -l[静态库的名字]
 > ​	SIGCHLD信号
 >
 > 3.自定义信号处理方式
+>
+> ​		signal函数
+>
+> ​		typedef void (*sighandler_t)(int);
+>
+> ​		sighandler_t signal(int signum, sighandler_t handler);该函数可以更改掉信号的处理动作
+>
+> ![image-20220127223917754](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220127223917754.png)
 
 ##### 自定义信号处理函数
+
+>sigaction函数
+>
+>int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+>
+>​	1.signum:待更改的信号的值
+>
+>​	2.struct sigaction
+>
+>​		struct sigaction{
+>
+>​				void (*sa_handler)(int);➡函数指针，保存了内核对信号的处理方式
+>
+>​				void (*sa_sigaction)(int , siginfo_t *, void *);
+>
+>​				sigset_t sa_mask;➡保存的是当前进程在处理信号的时候收到的信号
+>
+>​				int  sa_flags;➡SA_SIGNFO，操作系统在处理信号的时候，调用的就是sa_sigaction函数指针当中保存的值
+>
+>​											0，在处理信号的时候，调用sa_handler保存的函数
+>
+>​				void (*sa_restorer)(void)➡预留信息
+>
+>}
+>
+>​	3.act:将信号处理函数变为act;
+>
+>​	4.oldact:信号之前的处理方式
+>
+>*int sigemptyset(sigset_t *set)➡将位图的所有比特位设置为0
+>
+>
+
+信号阻塞
+
+
 
 
 
