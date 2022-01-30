@@ -2271,21 +2271,129 @@ gcc main.c -o main -L [path] -l[静态库的名字]
 >
 >*int sigemptyset(sigset_t *set)➡将位图的所有比特位设置为0
 >
+>![image-20220128084756889](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220128084756889.png)
 >
+>什么时候进入内核空间：调用系统调用函数的时候，或者调用库函数的时候（库函数底层大多数都是封装系统调用函数的）
 
-信号阻塞
+##### 信号阻塞
 
-
-
-
+>![image-20220128085131526](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220128085131526.png)
+>
+>1.信号的阻塞，并不会干扰信号的注册
+>
+>​	信号该注册还是注册，只不过是当前的进程不能立即处理
+>
+>2
+>
+>​	2.1当我们将block位图当中对应的bite位置为1，表示当前进程阻塞该信号
+>
+>​	2.2当进程收到一个该信号的时候，进程还是一如既往的对该信号进行注册
+>
+>​	2.3当进程进入到内核空间，准备返回用户空间的时候，调用do_signal函数，不会立即处理信号了
+>
+>​	2.4这里的不会立即处理，不是之后不处理
+>
+>int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
+>
+>​	how:告诉sigprocmask函数，应该怎么操作
+>
+>​	set:用来设置阻塞位图
+>
+>​		SIG_BLOCK:设置某个信号的阻塞
+>
+>​			block(new) = block(old) | set
+>
+>​		SIG_UNBLOCK:解除对某个信号的阻塞
+>
+>​			block(new) = block(old) & (~set)
+>
+>​		SIG_SETMASK:替换阻塞位图
+>
+>​			block(new) = set
+>
+>​	oldset:原来的阻塞位图
 
 ### 多线程
 
- 
+线程概念，线程控制，线程安全，互斥和同步，死锁，生产者与消费者模型，线程池
+
+
+
+ 1.线程概念
+
+多线程如歌避免栈调用混乱
 
   
 
+pid_t pid:轻量级进程id
 
+pid_t tgid:轻量级进程组id
+
+
+
+linux内核当中是没有线程概念的，而是轻量级进程的概念：LWP
+
+通俗的线程概念其实是c库当中的概念，libc.so.6库中的
+
+
+
+主线程：轻量级进程  struct task_struct{}
+
+​	pid_t pid;
+
+​	pid_t tgid
+
+​	pid == tgid
+
+工作线程
+
+​	pid_t pid;
+
+​	pid_t tgid;
+
+​	pid一定是不一样的
+
+​	tgid和主线程当中的tgid是一样的
+
+
+
+线程的独有和共享
+
+>共享：
+>
+>文件描述符表
+>
+>信号的处理方式
+>
+>当前的工作目录
+>
+>用户id 和组id
+
+
+
+
+
+线程控制（线程创建，线程终止，线程等待，线程分离）
+
+1.线程创建
+
+​	int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void * (*start_routine) (void *), void *arg);
+
+​		pthread_t:线程标识符：是一个出参，出参的作用就是要出来起作用，在函数内部赋值，到外部出来起作用（线程标识符是保存的地址，线程号是线程的身份证）
+
+​		pthread_attr_t：线程属性
+
+​			栈的大小，大概是8M,但是可以修改，使用ulimit -s xxx
+
+​			不设置线程属性，一般传值为NULL，采用默认属性
+
+​		start_routine：本质是函数指针，保存线程入口函数的地址
+
+​		arg:给线程入口的传参
+
+返回值：成功：等于0
+
+​				失败：小于0
 
 
 
