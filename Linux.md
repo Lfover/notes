@@ -2891,6 +2891,23 @@ posix版本的信号量
 
 ##  socket套接字
 
+udp编程
+
+tcp编程
+
+tcp编码
+
+
+
+
+
+
+
+![image-20220219143718200](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220219143718200.png)
+
+第一件事，将字符串类型的ip地址，转换成了32位的无符号整形
+
+第二件事，将主机的无符号32位整形，转换成了网络的
 
 
 
@@ -2900,6 +2917,54 @@ posix版本的信号量
 
 
 
+connect refuse解决办法
+
+在客户端用curl探测端口，发现22端口正常，9999端口被拒绝。
+
+判断22号端口没有问题
+
+![image-20220219155523459](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220219155523459.png)
 
 
+
+
+
+![image-20220219155630694](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220219155630694.png)
+
+下面就是关闭防火墙
+
+我的系统是，
+
+centos7
+
+首先查看防火墙是否运行
+
+![image-20220219155747751](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220219155747751.png)
+
+
+
+先切换到root下
+
+![image-20220219160409103](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220219160409103.png)
+
+![image-20220219160352192](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220219160352192.png)
+
+前面的方法，一旦重启操作系统，防火墙就自动开启了，应该执行下面的命令来设置才能永久关闭防火墙呢？
+输入命令：
+systemctl disable firewalld.service，开机禁止防火墙服务器
+systemctl enable firewalld.service，开机启动防火墙服务器
+
+
+
+
+
+
+
+![image-20220219160606434](C:\Users\86134\AppData\Roaming\Typora\typora-user-images\image-20220219160606434.png)
+
+
+
+
+
+抓包
 
