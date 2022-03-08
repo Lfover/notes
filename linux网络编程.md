@@ -42,6 +42,16 @@ HTTP代码模拟
 
 ​	1.1nginx的安装
 
+> ```
+> yum list | grep nginx
+> ```
+>
+> ```
+> yum install -y nginx
+> ```
+>
+> 
+
 ​	1.2nginx启动/关闭/重启/热加载配置文件
 
 ​	1.3进程模型
